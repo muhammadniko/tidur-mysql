@@ -2,15 +2,10 @@
 
 require_once ('config.php');
 
-class Query {
+class DB {
 
 	function __construct() {
-		$this->mysqli=new mysqli (	
-			DB_HOST, 
-			DB_USER, 
-			DB_PASSWORD, 
-			DB_NAME
-		) 
+		$this->mysqli=new mysqli (DB_HOST, DB_USER, DB_PASSWORD, DB_NAME) 
 			or die (mysqli_error()
 		);
 	}
@@ -101,6 +96,6 @@ class Query {
 	}
 }
 
-$db = new Query();
+$db = new DB();
 
 ?>
