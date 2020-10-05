@@ -10,26 +10,23 @@ class DB {
 
 	function insert($table, $data) {
 
-		$arr_field = array();
-		$arr_value = array();
-
 		// pecah array $data kedalam array $arr_field dan $arr_value
 		// untuk memisahkan field table dan value-nya
-		foreach ($data as $field => $value) {
-			$arr_field[] = $field;
-			$arr_value[] = "'".$value."'";
-		}
+		$arr_fields = array_keys($data);
+		$arr_values = array_values($data);
 
-		// Gabungan untuk masing-masing array, 
-		// setiap item dipisahkan dengan koma (--, --, ..)
-		$fields = implode(',', $arr_field);
-		$values = implode(',',$arr_value);
+		// field dipisahkan dengan koma (--, --, ..)
+		// value dipisahkan dengan koma dan diberi tanda petik ('--','--',..)
+		$fields = implode(",", $arr_fields); 
+		$values = "'".implode("','", $arr_values)."'";
 		
 		$SQL = "INSERT INTO ".$table." (".$fields.") VALUES (".$values.")";	
 		
-		$this->mysqli->query($SQL);
-
-		return true;
+		if ($this->mysqli->query($SQL)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	function delete($table, $where) {
