@@ -86,7 +86,7 @@ class DB {
 
 		$execute = $this->mysqli->query($SQL);
 		
-		while ($row = mysqli_fetch_array($execute)) {
+		while ($row = mysqli_fetch_assoc($execute)) {
 			$arr_data[] = $row;
 		}
 
